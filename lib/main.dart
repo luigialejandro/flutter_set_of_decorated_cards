@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Tavo'),
+          title: Text('Instrucciones'),
           centerTitle: true,
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xff731F3E),
         ),
         body: CardSetPageBody(),
       ),
