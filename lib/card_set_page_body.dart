@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_set_of_decorated_cards/docs_required_card.dart';
 
 class CardSetPageBody extends StatelessWidget {
   const CardSetPageBody({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class CardSetPageBody extends StatelessWidget {
             integratedCard(
                 stepNumber: 1,
                 stepIcon: Icon(
-                  Icons.hail,
+                  Icons.aod_outlined,
                   size: 35,
                   color: Colors.white,
                 ),
@@ -29,8 +30,7 @@ class CardSetPageBody extends StatelessWidget {
             SizedBox(height: 1),
             integratedCard(
               stepNumber: 2,
-              stepIcon:
-                  Icon(Icons.label_important, size: 35, color: Colors.white),
+              stepIcon: Icon(Icons.unarchive, size: 35, color: Colors.white),
               stepText1: '',
               stepText2: 'Ingresa la documentación',
               stepText3: 'requerida por la autoridad: ',
@@ -38,12 +38,24 @@ class CardSetPageBody extends StatelessWidget {
             ),
             SizedBox(height: 1),
             integratedCard(
-                stepNumber: 3,
-                stepIcon: Icon(Icons.unarchive, size: 35, color: Colors.white),
-                stepText1: '',
-                stepText2: '✓ Confirma tu identidad',
-                stepText3: 'a través de un video',
-                stepText4: '✓ Firma la solicitud'),
+              stepNumber: 3,
+              stepIcon:
+                  Icon(Icons.videocam_outlined, size: 35, color: Colors.white),
+              stepText1: '',
+              stepText2: '✓ Confirma tu identidad',
+              stepText3: 'a través de un video',
+              stepText4: '✓ Firma la solicitud',
+            ),
+            SizedBox(height: 30),
+            buildButton(
+                stepsTitle: 'Continuar',
+                stepsIcon: Icons.arrow_forward,
+                stepsColor: Color(0xffD9BCA3),
+                stepsOnClicked: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => DocsRequiredCard(),
+                      ),
+                    ))
           ],
         ),
       ),
@@ -181,4 +193,40 @@ class CardSetPageBody extends StatelessWidget {
       )),
     );
   }
+
+  Widget buildButton({
+    required String stepsTitle,
+    required IconData stepsIcon,
+    required VoidCallback stepsOnClicked,
+    required Color stepsColor,
+  }) =>
+      Container(
+        height: 60,
+        margin: EdgeInsets.symmetric(horizontal: 55),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              primary: stepsColor,
+              onPrimary: Colors.white,
+              textStyle: TextStyle(fontSize: 20)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                stepsTitle,
+                style: TextStyle(color: Colors.black),
+              ),
+              const SizedBox(width: 10),
+              CircleAvatar(
+                radius: 23,
+                backgroundColor: Colors.white,
+                child: CircleAvatar(
+                    radius: 21,
+                    backgroundColor: Color(0xff833F4C),
+                    child: Icon(stepsIcon, size: 24, color: Colors.white)),
+              ),
+            ],
+          ),
+          onPressed: stepsOnClicked,
+        ),
+      );
 }
