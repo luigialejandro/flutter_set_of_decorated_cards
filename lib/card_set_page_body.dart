@@ -50,7 +50,7 @@ class CardSetPageBody extends StatelessWidget {
             buildButton(
                 stepsTitle: 'Continuar',
                 stepsIcon: Icons.arrow_forward,
-                stepsColor: Color(0xffD9BCA3),
+                stepsColor: Color(0xff833F4C),
                 stepsOnClicked: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => DocsRequiredCard(),
@@ -213,7 +213,7 @@ class CardSetPageBody extends StatelessWidget {
             children: [
               Text(
                 stepsTitle,
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.white),
               ),
               const SizedBox(width: 10),
               CircleAvatar(

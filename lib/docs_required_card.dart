@@ -37,9 +37,9 @@ class _DocsRequiredCardState extends State<DocsRequiredCard> {
   Widget integratedDocsCard(context) {
     return Container(
         height: 415,
-        color: Colors.yellow,
+        //color: Color(0xff833F4C),
         width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Stack(
           children: [
             mainDocsContainer(context),
@@ -54,11 +54,23 @@ class _DocsRequiredCardState extends State<DocsRequiredCard> {
       //color: Colors.blue[500],
       height: 160,
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(
-        color: Colors.blue[500],
-        border: Border.all(width: 4.0, color: Colors.white),
-        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        color: Color(0xffD9BCA3),
+        border: Border.all(width: 3.0, color: Color(0xff833F4C)),
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(height: 15),
+          Text('Para poder generar o actualizar la',
+              style: TextStyle(fontSize: 16)),
+          Text('contraseña, deberás contar con alguno',
+              style: TextStyle(fontSize: 16)),
+          Text('de los siguientes documentos: ',
+              style: TextStyle(fontSize: 16)),
+        ],
       ),
     );
   }
@@ -66,14 +78,25 @@ class _DocsRequiredCardState extends State<DocsRequiredCard> {
   Widget secondDocsContainer(context) {
     return Container(
       //color: Colors.blue[200],
-      height: 260,
+      height: 240,
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.only(left: 60, right: 60, top: 130),
+      margin: EdgeInsets.only(left: 60, right: 60, top: 150),
       alignment: FractionalOffset.bottomCenter,
       decoration: BoxDecoration(
-        color: Colors.blue[200],
-        border: Border.all(width: 4.0, color: Colors.white),
-        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        color: Color(0xffD9BCA3),
+        border: Border.all(width: 3.0, color: Color(0xff833F4C)),
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('✓ Credencial para votar', style: TextStyle(fontSize: 18)),
+          Text('vigente, (INE).', style: TextStyle(fontSize: 18)),
+          SizedBox(height: 12),
+          Text('✓ Pasaporte vigente.', style: TextStyle(fontSize: 18)),
+          SizedBox(height: 12),
+          Text('✓ Cédula profesional.', style: TextStyle(fontSize: 18)),
+        ],
       ),
     );
   }
@@ -87,8 +110,21 @@ class _DocsRequiredCardState extends State<DocsRequiredCard> {
         //margin: EdgeInsets.symmetric(horizontal: 150),
         //color: Colors.red,
         child: CircleAvatar(
+          backgroundColor: Color(0xff833F4C),
           radius: 35,
-          backgroundColor: Colors.green[200],
+          child: CircleAvatar(
+            radius: 32,
+            backgroundColor: Colors.white,
+            child: CircleAvatar(
+              radius: 29,
+              backgroundColor: Color(0xff833F4C),
+              child: Icon(
+                Icons.unarchive,
+                color: Colors.white,
+                size: 35,
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -99,17 +135,17 @@ class _DocsRequiredCardState extends State<DocsRequiredCard> {
       child: Column(
         children: [
           buildButton(
-            stepsTitle: 'Iniciar trámite',
+            stepsTitle: 'Continuar',
             stepsIcon: Icons.arrow_forward,
             stepsOnClicked: () {},
-            stepsColor: Colors.blueAccent,
+            stepsColor: Color(0xffD9BCA3),
           ),
           SizedBox(height: 15),
           buildButton(
             stepsTitle: 'Cancelar',
             stepsIcon: Icons.clear,
             stepsOnClicked: () {},
-            stepsColor: Colors.orange,
+            stepsColor: Color(0xff833F4C),
           ),
         ],
       ),
@@ -135,7 +171,7 @@ class _DocsRequiredCardState extends State<DocsRequiredCard> {
             children: [
               Text(
                 stepsTitle,
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.white),
               ),
               const SizedBox(width: 10),
               CircleAvatar(
