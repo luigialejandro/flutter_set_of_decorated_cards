@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_set_of_decorated_cards/terms_conditions.dart';
 
 class DocsRequiredCard extends StatefulWidget {
   DocsRequiredCard({Key? key}) : super(key: key);
@@ -10,6 +11,14 @@ class DocsRequiredCard extends StatefulWidget {
 }
 
 class _DocsRequiredCardState extends State<DocsRequiredCard> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      showAlertDialog(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,8 +146,13 @@ class _DocsRequiredCardState extends State<DocsRequiredCard> {
           buildButton(
             stepsTitle: 'Continuar',
             stepsIcon: Icons.arrow_forward,
-            stepsOnClicked: () {},
+            stepsOnClicked: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => TermsConditions(),
+              ),
+            ),
             stepsColor: Color(0xffD9BCA3),
+            stepsAvatarColor: Color(0xffD9BCA3),
           ),
           SizedBox(height: 15),
           buildButton(
@@ -146,6 +160,7 @@ class _DocsRequiredCardState extends State<DocsRequiredCard> {
             stepsIcon: Icons.clear,
             stepsOnClicked: () {},
             stepsColor: Color(0xff833F4C),
+            stepsAvatarColor: Color(0xff833F4C),
           ),
         ],
       ),
@@ -157,6 +172,7 @@ class _DocsRequiredCardState extends State<DocsRequiredCard> {
     required IconData stepsIcon,
     required VoidCallback stepsOnClicked,
     required Color stepsColor,
+    required Color stepsAvatarColor,
   }) =>
       Container(
         height: 50,
@@ -179,7 +195,7 @@ class _DocsRequiredCardState extends State<DocsRequiredCard> {
                 backgroundColor: Colors.white,
                 child: CircleAvatar(
                     radius: 21,
-                    backgroundColor: Color(0xff833F4C),
+                    backgroundColor: stepsAvatarColor,
                     child: Icon(stepsIcon, size: 24, color: Colors.white)),
               ),
             ],
@@ -187,4 +203,28 @@ class _DocsRequiredCardState extends State<DocsRequiredCard> {
           onPressed: stepsOnClicked,
         ),
       );
+
+  showAlertDialog(BuildContext context) {
+    Widget okButton = TextButton(
+        child: Text("Continuar"),
+        onPressed: () => {Navigator.of(context).pop()});
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Información importante"),
+      content: Text(
+          "Asegúrate de tener a la mano la documentación requerida. Si tienes dudas puedes verificar pulsando aquí."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }
