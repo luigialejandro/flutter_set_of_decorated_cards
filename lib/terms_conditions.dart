@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_set_of_decorated_cards/identity_verification.dart';
 
 class TermsConditions extends StatelessWidget {
   const TermsConditions({Key? key}) : super(key: key);
@@ -70,7 +71,11 @@ class TermsConditions extends StatelessWidget {
       child: buildButton(
           stepsTitle: 'Aceptar',
           stepsIcon: Icons.check_box_outlined,
-          stepsOnClicked: () {},
+          stepsOnClicked: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => IdentityVerification(),
+                ),
+              ),
           stepsColor: Color(0xff833F4C)),
     );
   }
