@@ -1,6 +1,9 @@
 import 'dart:math';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_set_of_decorated_cards/identity_record.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
 
 class IdentityVerification extends StatefulWidget {
   IdentityVerification({Key? key}) : super(key: key);
@@ -10,6 +13,36 @@ class IdentityVerification extends StatefulWidget {
 }
 
 class _IdentityVerificationState extends State<IdentityVerification> {
+  VideoPlayerController? cameraVideoPlayerController;
+
+  Future pickVideoFromCamera() async {
+    try {
+      final pickedVideo =
+          await ImagePicker().pickVideo(source: ImageSource.camera);
+      if (pickedVideo != null) {
+        final cameraVideoFile = File(pickedVideo!.path);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  IdentityRecord(cameraVideo: cameraVideoFile)),
+        );
+      }
+      ;
+/*
+      setState(() => this.cameraVideo = cameraVideoFile);
+      cameraVideoPlayerController = VideoPlayerController.file(cameraVideoFile)
+        ..initialize().then((_) {
+          setState(() {});
+          cameraVideoPlayerController?.play();
+        });
+        */
+    } catch (e) {
+      print('Failed to pick video: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,7 +230,7 @@ class _IdentityVerificationState extends State<IdentityVerification> {
           buildSingleButton(
             stepsTitle: 'GRABAR',
             stepsIcon: Icons.videocam_outlined,
-            stepsOnClicked: () {},
+            stepsOnClicked: pickVideoFromCamera,
             stepsColor: Color(0xff833F4C),
             stepsAvatarColor: Color(0xff833F4C),
           ),
@@ -225,7 +258,7 @@ class _IdentityVerificationState extends State<IdentityVerification> {
   }) =>
       Container(
         height: 55,
-        margin: EdgeInsets.symmetric(horizontal: 40),
+        margin: EdgeInsets.symmetric(horizontal: 5),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               primary: stepsColor,
